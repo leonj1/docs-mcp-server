@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     name: Release to npm and GitHub
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     # Permissions needed for semantic-release to commit/tag/release
     permissions:
       contents: write
@@ -51,7 +51,7 @@ jobs:
     needs: release
     # Run only if semantic-release actually published a new version
     if: needs.release.outputs.new_release_published == 'true'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     permissions:
       contents: read      # Needed to check out the code
       packages: write     # Needed to push Docker image to GHCR
